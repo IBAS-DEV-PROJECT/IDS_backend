@@ -32,9 +32,10 @@ jobs:
         run: ./gradlew test --no-daemon
 
       - name: Build Docker image
-        run: docker build -t myapp .
+        run: docker build -t ${{ secrets.DOCKER_HUB_USERNAME }}/myapp:latest .
+
+      - name: Log in to DockerHub
+        run: echo "${{ secrets.DOCKER_HUB_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin
 
       - name: Push Docker image
-        run: |
-          docker tag myapp your_dockerhub_username/myapp:latest
-          docker push your_dockerhub_username/myapp:latest
+        run: docker push ${{ secrets.DOCKER_HUB_USERNAME }}/myapp:latest
