@@ -1,0 +1,29 @@
+# 최상위 EditorConfig 파일
+root = true
+
+[*]
+# UTF-8 인코딩
+charset = utf-8
+
+# LF(Line Feed) 줄바꿈 사용
+end_of_line = lf
+
+# 파일 마지막에 반드시 새 줄 추가
+insert_final_newline = true
+
+# 불필요한 공백 자동 제거
+trim_trailing_whitespace = true
+
+[*.bat]
+end_of_line = crlf
+
+[*.java]
+# 탭을 사용한 들여쓰기
+indent_style = tab
+
+# 탭 크기 설정
+indent_size = 4
+tab_width = 4
+
+# 최대 줄 길이 120자 제한
+max_line_length = 120
