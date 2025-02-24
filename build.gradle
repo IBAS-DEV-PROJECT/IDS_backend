@@ -2,52 +2,67 @@ plugins {
     id 'org.springframework.boot' version '3.2.2'
     id 'io.spring.dependency-management' version '1.1.4'
     id 'java'
-    id 'application'
-    id 'checkstyle'
+    id 'checkstyle'  //Checkstyle 적용
+    id 'com.diffplug.spotless' version '6.25.0' //Spotless 적용
 }
 
-repositories {
-    mavenCentral()
-}
-
-dependencies {
-    // Spring Boot 기본 라이브러리
-    implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-
-    // MariaDB 연동
-    implementation 'org.mariadb.jdbc:mariadb-java-client'
-
-    // Swagger (API 문서화)
-    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.2'
-
-    // Lombok (Getter, Setter 자동 생성)
-    compileOnly 'org.projectlombok:lombok'
-    annotationProcessor 'org.projectlombok:lombok'
-
-    // Test
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-}
-
-java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(17)
-    }
-}
-
-application {
+springBoot {
     mainClass = 'com.example.Main'
 }
 
-test {
-    useJUnitPlatform()
+allprojects {
+    repositories {
+        mavenCentral()
+    }
+}
+
+//추후에 module_oauth 의존성 추가해야함
+project(':resource-server') {
+    //api project(':module-auth')
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+    apply plugin: 'java'
+
+    dependencies {
+        implementation 'me.paulschwarz:spring-dotenv:3.0.0'
+        implementation 'org.springframework.boot:spring-boot-starter-web'
+        implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+        implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.2'
+        implementation 'org.mariadb.jdbc:mariadb-java-client'
+
+        compileOnly 'org.projectlombok:lombok'
+        annotationProcessor 'org.projectlombok:lombok'
+
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    }
+
+    java {
+        sourceCompatibility = '17'
+    }
+
+    tasks.named('test') {
+        useJUnitPlatform()
+    }
+
+}
+
+
+
+//project('module-oauth'){}
+
+spotless {
+    java {
+        target 'src/main/java/**/*.java' //전체 파일에 적용
+        indentWithTabs() //하드탭 사용
+        trimTrailingWhitespace()  //불필요한 공백 제거
+        endWithNewline()  //파일 끝 개행 유지
+        importOrder()  //import 정리
+        removeUnusedImports()  //사용하지 않는 import 제거
+        custom '네이버 컨벤션 적용', { it.replaceAll('(?<=public |private |protected |static |final ) +', ' ') }
+    }
 }
 
 checkstyle {
-    toolVersion = '8.24'
-    configFile = rootProject.file('config/naver-checkstyle-rules.xml')
-}
-
-tasks.named('checkstyleMain') {
-    ignoreFailures = false
+    toolVersion = '8.24'  //네이버 컨벤션에 맞는 Checkstyle 버전
+    configFile = rootProject.file('config/naver-checkstyle-rules.xml')  //Checkstyle 규칙 적용
 }

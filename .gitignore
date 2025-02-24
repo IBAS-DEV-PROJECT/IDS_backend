@@ -30,5 +30,8 @@ bin/
 # Ignore Gradle project-specific cache directory
 .gradle
 
+*.env
+.env
+
 # Ignore Gradle build output directory
 build

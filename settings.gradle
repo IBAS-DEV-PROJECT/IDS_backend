@@ -11,4 +11,5 @@ plugins {
 }
 
 rootProject.name = 'IDS_backend'
-include('app')
+include 'resource-server'
+include 'module_oauth'
