@@ -1,8 +1,8 @@
 spring:
-  datasource: #rds 발급 후 변경해야함
-    url: jdbc:mariadb://<RDS 엔드포인트>:3306/your_db_name
-    username: your_username
-    password: your_password
+  datasource:
+    url: jdbc:mariadb://${DB_HOST}:3306/${DB_NAME}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
     driver-class-name: org.mariadb.jdbc.Driver
 
   jpa:
@@ -18,3 +18,12 @@ mybatis:
   mapper-locations: classpath:mappers/**/*.xml
   configuration:
     map-underscore-to-camel-case: true
+
+springdoc:
+  api-docs:
+    enabled: true #API 문서 활성화
+  swagger-ui:
+    enabled: true  #Swagger UI 활성화
+    path: /swagger  #Swagger UI 접속 경로
+    operationsSorter: method  #HTTP 메서드 순서 정렬
+    tagsSorter: alpha  #태그 정렬
