@@ -17,6 +17,8 @@ import org.springframework.beans.factory.annotation.Value;
 import java.util.HashMap;
 import java.util.Map;
 
+
+//추후에 resource로 옮겨야함
 @RestController
 @RequestMapping("/api/auth")
 @Tag(name = "Spotify OAuth", description = "Spotify OAuth 인증 관련 API")

@@ -2,6 +2,7 @@ package com.spoti.api.auth.domain.token.controller;
 
 import com.spoti.api.auth.domain.token.RefreshRequestDto;
 import com.spoti.api.auth.domain.token.TokenDto;
+
 import com.spoti.api.auth.domain.token.TokenReIssuer;
 import lombok.RequiredArgsConstructor;
 
@@ -20,18 +21,20 @@ public class JwtTokenController {
 
   private final TokenReIssuer tokenReIssuer;
 
-  @PostMapping("/token/refresh")
-  @Operation(
-      summary = "access token 재발급을 요청한다.",
-      description = "request 헤더 Authenticate 에 refreshToken 넣어서 보내줘야함.")
-  @ApiResponses({
-    @ApiResponse(responseCode = "200"),
-    @ApiResponse(responseCode = "401", description = "유효하지 않은 refreshToken")
-  })
-  public ResponseEntity<TokenDto> reissueAccessToken(@RequestBody RefreshRequestDto refreshToken) {
+	@PostMapping("/token/refresh")
+	@Operation(
+		summary = "access token 재발급을 요청한다.",
+		description = "Request Body에 refreshToken을 JSON 형식으로 넣어서 요청해야 합니다."
+	)
+	@ApiResponses({
+		@ApiResponse(responseCode = "200", description = "성공적으로 accessToken 재발급 완료"),
+		@ApiResponse(responseCode = "401", description = "유효하지 않은 refreshToken")
+	})
+	public ResponseEntity<TokenDto> reissueAccessToken(@RequestBody RefreshRequestDto refreshRequestDto) {
+		// 올바른 방식으로 refreshToken을 가져오기
+		TokenDto newAccessToken = tokenReIssuer.reissueAccessToken(refreshRequestDto.getRefreshToken());
 
-    TokenDto newAccessToken = tokenReIssuer.reissueAccessToken(refreshToken.getRefreshToken());
+		return ResponseEntity.ok(newAccessToken);
+	}
 
-    return ResponseEntity.ok(newAccessToken);
-  }
 }

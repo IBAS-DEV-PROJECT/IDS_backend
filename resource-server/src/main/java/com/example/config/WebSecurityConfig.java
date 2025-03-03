@@ -8,7 +8,7 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.web.SecurityFilterChain;
 
 /**
- * api 엔드포인트에 대한 여러 보안 설정을 담당함.
+ * API 엔드포인트에 대한 보안 설정 (JWT 인증 방식 사용)
  */
 @Configuration
 @EnableWebSecurity
@@ -20,16 +20,22 @@ public class WebSecurityConfig {
 			.authorizeHttpRequests(authorize -> authorize
 				// Swagger UI 관련 경로 모두 허용
 				.requestMatchers("/swagger-ui/**", "/swagger-ui.html", "/v3/api-docs/**", "/swagger-resources/**").permitAll()
-				// 필요한 경우 다른 API 경로도 허용 (예시)
-				// .requestMatchers("/api/public/**").permitAll()
+				// 로그인 페이지 접근 허용
+				.requestMatchers("/login", "/error").permitAll()
 				// 나머지 요청은 인증 필요
 				.anyRequest().authenticated()
 			)
 			.formLogin(form -> form
 				.loginPage("/login")
+				.defaultSuccessUrl("/", true) // 로그인 성공 시 리디렉션할 기본 페이지 설정
 				.permitAll()
 			)
-			.csrf(AbstractHttpConfigurer::disable);
+			.logout(logout -> logout
+				.logoutUrl("/logout")
+				.logoutSuccessUrl("/login?logout")
+				.permitAll()
+			)
+			.csrf(AbstractHttpConfigurer::disable); // CSRF 비활성화
 
 		return http.build();
 	}

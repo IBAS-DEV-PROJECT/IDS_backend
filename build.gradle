@@ -19,6 +19,8 @@ allprojects {
 dependencies {
     // Swagger 3 (OpenAPI)
     implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0'
+    implementation 'mysql:mysql-connector-java:8.0.33'
+    implementation 'me.paulschwarz:spring-dotenv:4.0.0'
 }
 
 project(':module_oauth') {
@@ -34,8 +36,19 @@ project(':module_oauth') {
         api 'org.springframework.boot:spring-boot-starter-security'
         api 'org.springframework.boot:spring-boot-starter-oauth2-client'
 
+        // jpa 관련, 추후에 module jpa 만들어서 따로 관리할 것
+        api (
+                'org.springframework.boot:spring-boot-starter-data-jpa',
+                'com.querydsl:querydsl-jpa', // query dsl
+                'com.jcraft:jsch:0.1.55',  // 로컬 개발용 db ssh tunneling, https://mavenlibs.com/maven/dependency/com.jcraft/jsch
+//                'org.mariadb.jdbc:mariadb-java-client',
+                'mysql:mysql-connector-java:8.0.33',
+                'com.h2database:h2'
+        )
+
         // 웹 관련 의존성 추가
         api 'org.springframework.boot:spring-boot-starter-web'
+        implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 
         // Swagger/OpenAPI 의존성 추가
         implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0'
@@ -44,8 +57,17 @@ project(':module_oauth') {
         compileOnly 'org.projectlombok:lombok'
         annotationProcessor 'org.projectlombok:lombok'
 
+        // JJWT 의존성
+        implementation 'io.jsonwebtoken:jjwt-api:0.11.2'
+        implementation 'io.jsonwebtoken:jjwt-impl:0.11.2'
+        implementation 'io.jsonwebtoken:jjwt-jackson:0.11.2'
+
+        // security
+        implementation 'org.springframework.boot:spring-boot-starter-security'
+
         testImplementation 'org.springframework.security:spring-security-test'
         testImplementation 'org.mockito:mockito-inline:2.13.0'
+
     }
 }
 
