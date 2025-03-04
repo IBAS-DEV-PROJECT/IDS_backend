@@ -5,14 +5,17 @@ spring:
     password: ${DB_PASSWORD}
     driver-class-name: org.mariadb.jdbc.Driver
 
-  jpa:
+jpa:
+  hibernate:
+    ddl-auto: update
+  properties:
     hibernate:
-      ddl-auto: update
-    properties:
-      hibernate:
-        format_sql: true
-        dialect: org.hibernate.dialect.MariaDBDialect
-    show-sql: true
+      format_sql: true
+      dialect: org.hibernate.dialect.MariaDBDialect
+  show-sql: true
+
+jwt:
+  secretKey: "ThisIsMySecretKey1234567890ThisIsMySecretKey1234567890"
 
 mybatis:
   mapper-locations: classpath:mappers/**/*.xml

@@ -12,12 +12,12 @@ import com.spoti.api.auth.domain.error.ErrorCode;
 public abstract class CustomAuthException extends AuthenticationException {
 
 	private final ErrorCode errorCode;
-
+	//오류 메시지 + 오류 코드 받는 경우
 	public CustomAuthException(String message, ErrorCode errorCode) {
 		super(message);
 		this.errorCode = errorCode;
 	}
-
+	//오류 코드 받는 경우
 	public CustomAuthException(ErrorCode errorCode) {
 		super(errorCode.getMessage());
 		this.errorCode = errorCode;
