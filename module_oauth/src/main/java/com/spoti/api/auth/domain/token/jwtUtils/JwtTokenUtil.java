@@ -125,8 +125,22 @@ public class JwtTokenUtil implements TokenUtil {
 	}
 
 	@Override
+	public String createAccessToken(Authentication authentication) {
+
+		return createToken(authentication, ACCESS_TOKEN_VALID_MILLISECOND);
+	}
+
+	@Override
+	public String createRefreshToken(Authentication authentication) {
+
+		String token = this.createToken(authentication, REFRESH_TOKEN_VALID_MILLI_SECOND);
+		refreshTokenRepository.save(new RefreshToken(token));
+		return token;
+	}
+
+	@Override
 	public long getExpiration() {
-		return 0;
+		return ACCESS_TOKEN_VALID_MILLISECOND / 1000;
 	}
 
 	/**

@@ -36,7 +36,7 @@ public interface TokenUtil {
 	 * @param authentication OAuth 2.0 인증 객체
 	 * @return 생성된 액세스 토큰이 포함된 TokenDto 객체
 	 */
-	//TokenDto createAccessToken(Authentication authentication);
+	String createAccessToken(Authentication authentication);
 
 	/**
 	 * OAuth 2.0 인증 결과를 기반으로 리프레시 토큰을 생성하는 메서드
@@ -44,7 +44,7 @@ public interface TokenUtil {
 	 * @param authentication OAuth 2.0 인증 객체
 	 * @return 생성된 리프레시 토큰이 포함된 TokenDto 객체
 	 */
-	//TokenDto createRefreshToken(Authentication authentication);
+	String createRefreshToken(Authentication authentication);
 
 	/**
 	 * 액세스 토큰의 유효 기간을 초 단위로 반환하는 메서드
