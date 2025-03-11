@@ -8,9 +8,15 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
-@ComponentScan(basePackages = {"com.example", "com.spoti.api.auth"})
-@EnableJpaRepositories(basePackages = {"com.spoti.api.auth.domain"}) // 모든 리포지토리 포함하도록 설정
-@EntityScan(basePackages = {"com.spoti.api.auth.domain"}) // 모든 엔티티 포함하도록 설정
+@ComponentScan(basePackages = {"com.example", "com.spoti.api.auth", "com.example.web"})
+@EnableJpaRepositories(basePackages = {
+	"com.spoti.api.auth.domain",
+	"com.example.web.recommending.repository" //정확하게 패키지 명시
+})
+@EntityScan(basePackages = {
+	"com.spoti.api.auth.domain",
+	"com.example.web.recommending.domain"
+})
 public class Main {
 	public static void main(String[] args) {
 		SpringApplication app = new SpringApplication(Main.class);
