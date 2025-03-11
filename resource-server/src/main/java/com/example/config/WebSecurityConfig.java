@@ -22,6 +22,8 @@ public class WebSecurityConfig {
 				.requestMatchers("/swagger-ui/**", "/swagger-ui.html", "/v3/api-docs/**", "/swagger-resources/**").permitAll()
 				// 로그인 페이지 접근 허용
 				.requestMatchers("/login", "/error").permitAll()
+				// 추천 API는 인증 없이 허용
+				.requestMatchers("/recommendation").permitAll()
 				// 나머지 요청은 인증 필요
 				.anyRequest().authenticated()
 			)
