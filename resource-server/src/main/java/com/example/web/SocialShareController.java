@@ -236,50 +236,6 @@ public class SocialShareController {
 		return ResponseEntity.ok().build();
 	}
 
-	/**
-	 * 소셜 미디어 직접 공유 API (OAuth 인증 필요한 경우)
-	 */
-	@Operation(summary = "소셜 미디어에 직접 공유", description = "소셜 미디어 플랫폼에 컨텐츠를 직접 공유합니다 (인증 필요한 경우)")
-	@ApiResponses(value = {
-		@ApiResponse(
-			responseCode = "200",
-			description = "공유 성공",
-			content = @Content(
-				schema = @Schema(implementation = SocialShareResponse.class)
-			)
-		),
-		@ApiResponse(
-			responseCode = "400",
-			description = "잘못된 요청",
-			content = @Content(
-				schema = @Schema(implementation = ErrorResponse.class),
-				examples = @ExampleObject(
-					value = "{\"status\": 400, \"code\": \"S005\", \"message\": \"지원하지 않는 플랫폼입니다.\"}"
-				)
-			)
-		),
-		@ApiResponse(
-			responseCode = "401",
-			description = "인증 오류",
-			content = @Content(
-				schema = @Schema(implementation = ErrorResponse.class),
-				examples = @ExampleObject(
-					value = "{\"status\": 401, \"code\": \"S006\", \"message\": \"인증이 필요합니다.\"}"
-				)
-			)
-		),
-		@ApiResponse(
-			responseCode = "500",
-			description = "서버 오류",
-			content = @Content(
-				schema = @Schema(implementation = ErrorResponse.class),
-				examples = @ExampleObject(
-					value = "{\"status\": 500, \"code\": \"S007\", \"message\": \"공유 처리 중 오류 발생\"}"
-				)
-			)
-		)
-	})
-
 	@PostMapping("/post")
 	public ResponseEntity<SocialShareResponse> postToSocialMedia(
 		@io.swagger.v3.oas.annotations.parameters.RequestBody(

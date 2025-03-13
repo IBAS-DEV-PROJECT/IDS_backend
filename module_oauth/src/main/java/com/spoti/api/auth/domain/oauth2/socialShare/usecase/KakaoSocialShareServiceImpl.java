@@ -1,5 +1,6 @@
 package com.spoti.api.auth.domain.oauth2.socialShare.usecase;
 
+import lombok.Getter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,7 @@ import com.spoti.api.auth.domain.oauth2.socialShare.repository.ShareStatisticsRe
 /**
  * 카카오톡 공유 기능 구현 클래스
  */
+@Getter
 @Service
 @Primary
 public class KakaoSocialShareServiceImpl extends SocialShareServiceImpl {
@@ -93,13 +95,6 @@ public class KakaoSocialShareServiceImpl extends SocialShareServiceImpl {
 		response.setMessage("카카오톡 공유 정보 생성 성공");
 
 		return response;
-	}
-
-	/**
-	 * API 키 getter 메서드
-	 */
-	public String getKakaoApiKey() {
-		return kakaoApiKey;
 	}
 
 	/**

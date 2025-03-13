@@ -49,7 +49,7 @@ public class XSocialShareServiceImpl extends SocialShareServiceImpl {
 
 	/**
 	 * X 공유 URL 생성
-	 * 프론트엔드에서 window.open()으로 열 수 있는 URL을 생성합니다.
+	 * 프론트엔드에서 window.open()으로 열 수 있는 URL을 생성
 	 */
 	public String generateXShareUrl(Long contentId, String customText) {
 		try {

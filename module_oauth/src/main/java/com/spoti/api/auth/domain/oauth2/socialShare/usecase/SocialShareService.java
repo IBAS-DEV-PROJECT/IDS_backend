@@ -1,6 +1,5 @@
 package com.spoti.api.auth.domain.oauth2.socialShare.usecase;
 
-import java.util.Map;
 import com.spoti.api.auth.domain.oauth2.socialShare.dto.SocialShareResponse;
 
 /**
