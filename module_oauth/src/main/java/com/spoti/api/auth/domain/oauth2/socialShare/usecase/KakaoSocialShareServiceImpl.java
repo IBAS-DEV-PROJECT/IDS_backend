@@ -36,13 +36,13 @@ public class KakaoSocialShareServiceImpl extends SocialShareServiceImpl {
 	@Override
 	protected void addPlatformSpecificInfo(Map<String, Object> result, Content content, String baseUrl) {
 		// 카카오톡 공유 URL 생성
-		String shareUrl = createShareUrlWithUtm(baseUrl, "kakao");
+		String kakaoShareUrl = createShareUrlWithUtm(baseUrl, "kakao");
 
 		// 카카오톡에서만 사용되는 특정 정보 추가
 		result.put("kakaoApiKey", kakaoApiKey);
 
 		// 카카오톡 메시지 템플릿 정보 추가
-		Map<String, Object> kakaoTemplate = generateKakaoTemplate(content, shareUrl);
+		Map<String, Object> kakaoTemplate = generateKakaoTemplate(content, kakaoShareUrl);
 		result.put("kakaoTemplate", kakaoTemplate);
 	}
 

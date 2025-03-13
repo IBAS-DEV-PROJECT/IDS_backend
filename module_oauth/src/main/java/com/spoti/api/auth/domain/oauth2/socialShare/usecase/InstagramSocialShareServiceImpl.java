@@ -33,18 +33,18 @@ public class InstagramSocialShareServiceImpl extends SocialShareServiceImpl {
 	@Override
 	protected void addPlatformSpecificInfo(Map<String, Object> result, Content content, String baseUrl) {
 		// 인스타그램 공유 URL 생성
-		String shareUrl = createShareUrlWithUtm(baseUrl, "instagram");
+		String instagramShareUrl = createShareUrlWithUtm(baseUrl, "instagram");
 
 		try {
 			// 1. 인스타그램 스토리 딥링크 생성
 			String storyDeepLink = generateInstagramStoryDeepLink(
 				content.getThumbnailUrl(),
-				shareUrl,
+				instagramShareUrl,
 				content.getTitle());
 
 			result.put("instagramStoryDeepLink", storyDeepLink);
-			result.put("instagramShareUrl", shareUrl);
-			result.put("instagramCopyMessage", content.getTitle() + " " + shareUrl);
+			result.put("instagramShareUrl", instagramShareUrl);
+			result.put("instagramCopyMessage", content.getTitle() + " " + instagramShareUrl);
 			result.put("instagramShareInstructions",
 				"인스타그램 공유 방법:\n" +
 					"1. 스토리 공유: '인스타그램 스토리에 공유' 버튼을 클릭하세요.\n" +
