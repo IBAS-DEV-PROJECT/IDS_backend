@@ -248,17 +248,9 @@ public class SocialShareController {
 				)
 			)
 		)
-		@RequestBody SocialShareRequest request,
-		@Parameter(description = "인증 토큰 (OAuth 인증이 필요한 경우)")
-		@RequestHeader(value = "Authorization", required = false) String authToken) {
+		@RequestBody SocialShareRequest request) {
 
 		String platform = request.getPlatform().toLowerCase();
-
-		// OAuth 인증이 필요한 경우 토큰 검증
-		if ("x".equals(platform) && (authToken == null || !xShareService.validateToken(authToken))) {
-			return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-				.body(SocialShareResponse.failure("인증이 필요합니다."));
-		}
 
 		try {
 			SocialShareResponse response;
@@ -267,22 +259,19 @@ public class SocialShareController {
 				case "x":
 					response = xShareService.shareToSocialMedia(
 						request.getContentId(),
-						request.getMessage(),
-						authToken);
+						request.getMessage());
 					break;
 
 				case "kakao":
 					response = kakaoShareService.shareToSocialMedia(
 						request.getContentId(),
-						request.getMessage(),
-						authToken);
+						request.getMessage());
 					break;
 
 				case "instagram":
 					response = instagramShareService.shareToSocialMedia(
 						request.getContentId(),
-						request.getMessage(),
-						authToken);
+						request.getMessage());
 					break;
 
 				default:
@@ -297,4 +286,5 @@ public class SocialShareController {
 				.body(SocialShareResponse.failure("공유 처리 중 오류 발생: " + e.getMessage()));
 		}
 	}
+
 }

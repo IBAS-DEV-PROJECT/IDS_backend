@@ -80,7 +80,7 @@ public class XSocialShareServiceImpl extends SocialShareServiceImpl {
 	 * X(트위터)로 직접 공유하기 (현재는 API 접근이 불가능하므로 지원하지 않음)
 	 */
 	@Override
-	public SocialShareResponse shareToSocialMedia(Long contentId, String message, String authToken) {
+	public SocialShareResponse shareToSocialMedia(Long contentId, String message) {
 		try {
 			// 공유 URL 생성만 제공
 			String shareUrl = generateXShareUrl(contentId, message);

@@ -84,19 +84,10 @@ public class SocialShareServiceImpl implements SocialShareService {
 	}
 
 	/**
-	 * 사용자 인증 토큰 검증
-	 */
-	@Override
-	public boolean validateToken(String authToken) {
-		// 실제 구현에서는 JWT 토큰 검증 등의 로직 필요
-		return authToken != null && authToken.startsWith("Bearer ");
-	}
-
-	/**
 	 * 소셜 미디어에 직접 콘텐츠 공유하기 (기본 구현)
 	 */
 	@Override
-	public SocialShareResponse shareToSocialMedia(Long contentId, String message, String authToken) {
+	public SocialShareResponse shareToSocialMedia(Long contentId, String message) {
 		return SocialShareResponse.failure("이 플랫폼은 직접 공유를 지원하지 않습니다.");
 	}
 

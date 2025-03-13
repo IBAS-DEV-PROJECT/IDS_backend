@@ -121,7 +121,7 @@ public class InstagramSocialShareServiceImpl extends SocialShareServiceImpl {
 	 * 인스타그램에 직접 공유하기 (현재 API 미지원)
 	 */
 	@Override
-	public SocialShareResponse shareToSocialMedia(Long contentId, String message, String authToken) {
+	public SocialShareResponse shareToSocialMedia(Long contentId, String message) {
 		return SocialShareResponse.failure("인스타그램은 API를 통한 직접 공유를 지원하지 않습니다.");
 	}
 }

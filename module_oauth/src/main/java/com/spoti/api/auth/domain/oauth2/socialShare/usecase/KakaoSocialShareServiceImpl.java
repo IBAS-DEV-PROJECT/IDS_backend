@@ -101,7 +101,7 @@ public class KakaoSocialShareServiceImpl extends SocialShareServiceImpl {
 	 * 카카오톡에 직접 공유하기 (현재 API 미지원)
 	 */
 	@Override
-	public SocialShareResponse shareToSocialMedia(Long contentId, String message, String authToken) {
+	public SocialShareResponse shareToSocialMedia(Long contentId, String message) {
 		return SocialShareResponse.failure("카카오톡은 SDK를 통한 클라이언트 측 공유만 지원합니다.");
 	}
 }
