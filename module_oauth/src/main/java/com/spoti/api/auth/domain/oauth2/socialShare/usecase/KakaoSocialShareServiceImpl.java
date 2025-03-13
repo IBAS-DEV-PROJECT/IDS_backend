@@ -1,5 +1,6 @@
 package com.spoti.api.auth.domain.oauth2.socialShare.usecase;
 
+import lombok.Getter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,7 @@ import com.spoti.api.auth.domain.oauth2.socialShare.repository.ShareStatisticsRe
 /**
  * 카카오톡 공유 기능 구현 클래스
  */
+@Getter
 @Service
 @Primary
 public class KakaoSocialShareServiceImpl extends SocialShareServiceImpl {
@@ -34,13 +36,13 @@ public class KakaoSocialShareServiceImpl extends SocialShareServiceImpl {
 	@Override
 	protected void addPlatformSpecificInfo(Map<String, Object> result, Content content, String baseUrl) {
 		// 카카오톡 공유 URL 생성
-		String shareUrl = createShareUrlWithUtm(baseUrl, "kakao");
+		String kakaoShareUrl = createShareUrlWithUtm(baseUrl, "kakao");
 
 		// 카카오톡에서만 사용되는 특정 정보 추가
 		result.put("kakaoApiKey", kakaoApiKey);
 
 		// 카카오톡 메시지 템플릿 정보 추가
-		Map<String, Object> kakaoTemplate = generateKakaoTemplate(content, shareUrl);
+		Map<String, Object> kakaoTemplate = generateKakaoTemplate(content, kakaoShareUrl);
 		result.put("kakaoTemplate", kakaoTemplate);
 	}
 
@@ -96,17 +98,10 @@ public class KakaoSocialShareServiceImpl extends SocialShareServiceImpl {
 	}
 
 	/**
-	 * API 키 getter 메서드
-	 */
-	public String getKakaoApiKey() {
-		return kakaoApiKey;
-	}
-
-	/**
 	 * 카카오톡에 직접 공유하기 (현재 API 미지원)
 	 */
 	@Override
-	public SocialShareResponse shareToSocialMedia(Long contentId, String message, String authToken) {
+	public SocialShareResponse shareToSocialMedia(Long contentId, String message) {
 		return SocialShareResponse.failure("카카오톡은 SDK를 통한 클라이언트 측 공유만 지원합니다.");
 	}
 }
