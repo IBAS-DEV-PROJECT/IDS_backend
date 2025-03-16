@@ -4,10 +4,10 @@ import com.spoti.api.auth.domain.error.ErrorCode;
 
 import lombok.Getter;
 
-/*
-	부모클래스이자 custonException 클래스
-	Service에서 비즈니스를 처리하기 위한 로직이 구현된 부분
-*/
+/**
+ *  부모클래스이자 custonException 클래스
+ * 	Service에서 비즈니스를 처리하기 위한 로직이 구현된 부분
+**/
 @Getter
 public class BusinessException extends RuntimeException
 {
