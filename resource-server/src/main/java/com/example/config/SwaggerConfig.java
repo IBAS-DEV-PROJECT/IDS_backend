@@ -123,7 +123,7 @@ public class SwaggerConfig {
 	@Bean
 	public GroupedOpenApi getQuestionAPI(){
 		return GroupedOpenApi.builder()
-			.group("질문 답변 관련")
+			.group("질문 및 답변 관련")
 			.pathToMatch("/api/questions/**","/api/responses/**")
 			.build();
 	}
