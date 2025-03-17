@@ -119,4 +119,12 @@ public class SwaggerConfig {
 			.pathsToMatch("/api/player/**", "/api/queue/**")
 			.build();
 	}
+
+	@Bean
+	public GroupedOpenApi getQuestionAPI(){
+		return GroupedOpenApi.builder()
+			.group("질문 답변 관련")
+			.pathToMatch("/api/questions/**","/api/responses/**")
+			.build();
+	}
 }
