@@ -32,3 +32,5 @@ spring:
             user-name-attribute: id
 jwt:
   secretKey: "ThisIsMySecretKey1234567890ThisIsMySecretKey1234567890"
+app:
+  base-url: http://localhost:8080  #개발환경 기준, 실제 배포 시 변경 필요
