@@ -13,9 +13,9 @@ import java.util.Map;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api")
-public class QnAController {
-    
+@RequestMapping("/api/test-progress")  // 진행 상황 관련 API 경로
+public class TestProgressController {
+
     @Autowired
     private TestProgressRepository testProgressRepository;
 
@@ -31,9 +31,9 @@ public class QnAController {
         @ApiResponse(responseCode = "200", description = "진행 상황 반환",
             content = @Content(schema = @Schema(implementation = TestProgress.class))),
         @ApiResponse(responseCode = "404", description = "진행 상황 없음",
-            content = @Content(schema = @Schema(example = "{\"status\": 404, \"message\": \"진행 상황을 찾을 수 없습니다.\"}")))
+            content = @Content(schema = @Schema(example = "{\"status\": 404, \"message\": \"진행 상황을 찾을 수 없습니다.\"}"))))
     })
-    @GetMapping("/test-progress/{userId}")
+    @GetMapping("/{userId}")
     public ResponseEntity<Object> getTestProgress(@PathVariable Long userId) {
         Optional<TestProgress> progress = testProgressRepository.findByUserId(userId);
         return progress.map(ResponseEntity::ok).orElseGet(() -> 
@@ -53,9 +53,9 @@ public class QnAController {
         @ApiResponse(responseCode = "200", description = "진행 상황 저장 완료",
             content = @Content(schema = @Schema(implementation = TestProgress.class))),
         @ApiResponse(responseCode = "400", description = "잘못된 요청",
-            content = @Content(schema = @Schema(example = "{\"status\": 400, \"message\": \"잘못된 요청입니다.\"}")))
+            content = @Content(schema = @Schema(example = "{\"status\": 400, \"message\": \"잘못된 요청입니다.\"}"))))
     })
-    @PostMapping("/test-progress")
+    @PostMapping("/")
     public ResponseEntity<Object> saveTestProgress(@RequestBody TestProgress testProgress) {
         if (testProgress == null || testProgress.getUserId() == null) {
             return ResponseEntity.badRequest().body(Map.of(
@@ -74,7 +74,7 @@ public class QnAController {
     )
     @ApiResponses({
         @ApiResponse(responseCode = "200", description = "참여 인원 수 반환",
-            content = @Content(schema = @Schema(type = "integer", format = "int64")))
+            content = @Content(schema = @Schema(type = "integer", format = "int64"))))
     })
     @GetMapping("/participants/count")
     public ResponseEntity<Map<String, Object>> getParticipantCount() {

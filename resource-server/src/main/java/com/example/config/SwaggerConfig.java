@@ -121,18 +121,19 @@ public class SwaggerConfig {
 	}
 
 	@Bean
-	public GroupedOpenApi getQuestionAPI(){
+	public GroupedOpenApi getQnAAPI() {
 		return GroupedOpenApi.builder()
 			.group("질문 및 답변 관련")
-			.pathsToMatch("/api/questions/**","/api/responses/**")
+			.pathsToMatch("/api/questions/**", "/api/responses/**")
 			.build();
 	}
 
 	@Bean
-	public GroupedOpenApi getProgressAPI(){
+	public GroupedOpenApi getTestProgressAPI() {
 		return GroupedOpenApi.builder()
-			.group("테스트 진행상황 관련")
-			.pathsToMatch("/api/progress/**")
+			.group("진행 상황 및 참여 인원 관련")
+			.pathsToMatch("/api/test-progress/**", "/api/participants/**")
 			.build();
 	}
+
 }
