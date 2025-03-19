@@ -127,4 +127,12 @@ public class SwaggerConfig {
 			.pathsToMatch("/api/questions/**","/api/responses/**")
 			.build();
 	}
+
+	@Bean
+	public GroupedOpenApi getProgressAPI(){
+		return GroupedOpenApi.builder()
+			.group("테스트 진행상황 관련")
+			.pathsToMatch("/api/progress/**")
+			.build();
+	}
 }
