@@ -58,12 +58,14 @@ public interface ShareStatisticsRepository extends JpaRepository<ShareStatistics
 	/**
 	 * 특정 기간 내 일별 공유 추이
 	 */
-	@Query("SELECT FUNCTION('DATE', s.sharedAt) as shareDate, COUNT(s) " +
-		"FROM ShareStatistics s " +
-		"WHERE s.sharedAt BETWEEN :startDate AND :endDate " +
-		"GROUP BY FUNCTION('DATE', s.sharedAt) " +
-		"ORDER BY shareDate ASC")
+	@Query(value = "SELECT DATE(s.shared_at) as shareDate, COUNT(s.id) " +
+		"FROM share_statistics s " +
+		"WHERE s.shared_at BETWEEN :startDate AND :endDate " +
+		"GROUP BY DATE(s.shared_at) " +
+		"ORDER BY shareDate ASC",
+		nativeQuery = true)
 	List<Object[]> countSharesByDateBetween(
 		@Param("startDate") LocalDateTime startDate,
 		@Param("endDate") LocalDateTime endDate);
+
 }

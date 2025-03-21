@@ -23,11 +23,6 @@ public interface ContentRepository extends JpaRepository<Content, Long> {
 	List<Content> findByTitleContaining(String title);
 
 	/**
-	 * 작성자 ID로 컨텐츠 목록 조회
-	 */
-	List<Content> findByAuthorId(Long authorId);
-
-	/**
 	 * 조회수 순으로 인기 컨텐츠 조회
 	 */
 	@Query("SELECT c FROM Content c ORDER BY c.viewCount DESC")

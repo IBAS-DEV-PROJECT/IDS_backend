@@ -35,9 +35,6 @@ public class Content {
 	@Column(name = "content_url")
 	private String contentUrl;
 
-	@Column(name = "author_id")
-	private Long authorId;
-
 	@Column(name = "view_count", columnDefinition = "integer default 0")
 	private Integer viewCount = 0;
 
