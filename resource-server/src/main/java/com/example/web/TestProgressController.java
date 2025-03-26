@@ -1,5 +1,7 @@
 package com.example.web;
 
+import com.example.web.progress.dto.ParticipantCountDTO;
+import com.example.web.progress.usecase.TestProgressService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -9,18 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Map;
-import java.util.Optional;
-
 @RestController
-@RequestMapping("/api/test-progress")  // 진행 상황 관련 API 경로
+@RequestMapping("/api/test-progress")
 public class TestProgressController {
 
     @Autowired
-    private TestProgressRepository testProgressRepository;
-
-    @Autowired
-    private ParticipantRepository participantRepository;
+    private TestProgressService testProgressService;
 
     @Operation(
         summary = "참여 인원 카운팅",
@@ -28,14 +24,12 @@ public class TestProgressController {
     )
     @ApiResponses({
         @ApiResponse(responseCode = "200", description = "참여 인원 수 반환",
-            content = @Content(schema = @Schema(type = "integer", format = "int64")))
+            content = @Content(schema = @Schema(implementation = ParticipantCountDTO.class)))
     })
     @GetMapping("/participants/count")
-    public ResponseEntity<Map<String, Object>> getParticipantCount() {
-        long count = participantRepository.count();
-        return ResponseEntity.ok(Map.of(
-            "status", 200,
-            "participantCount", count
-        ));
+    public ResponseEntity<ParticipantCountDTO> getParticipantCount() {
+        long count = testProgressService.getParticipantCount();
+        ParticipantCountDTO response = new ParticipantCountDTO((int) count);
+        return ResponseEntity.ok(response);
     }
 }
