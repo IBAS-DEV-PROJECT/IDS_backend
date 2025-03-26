@@ -30,9 +30,9 @@ public class QnAController {
     )
     @ApiResponses({
         @ApiResponse(responseCode = "200", description = "성공적으로 랜덤 질문 반환",
-            content = @Content(schema = @Schema(implementation = Question.class)))),
+            content = @Content(schema = @Schema(implementation = Question.class))),
         @ApiResponse(responseCode = "404", description = "질문 데이터 없음",
-            content = @Content(schema = @Schema(example = "{\"status\": 404, \"message\": \"질문 데이터가 없습니다.\"}"))))
+            content = @Content(schema = @Schema(example = "{\"status\": 404, \"message\": \"질문 데이터가 없습니다.\"}")))
     })
     @GetMapping("/")  // /questions 경로로 수정
     public ResponseEntity<Object> getRandomQuestion() {
@@ -54,9 +54,9 @@ public class QnAController {
     )
     @ApiResponses({
         @ApiResponse(responseCode = "200", description = "답변 저장 완료",
-            content = @Content(schema = @Schema(implementation = Answer.class)))),
+            content = @Content(schema = @Schema(implementation = Answer.class))),
         @ApiResponse(responseCode = "400", description = "잘못된 요청",
-            content = @Content(schema = @Schema(example = "{\"status\": 400, \"message\": \"잘못된 요청입니다.\"}"))))
+            content = @Content(schema = @Schema(example = "{\"status\": 400, \"message\": \"잘못된 요청입니다.\"}")))
     })
     @PostMapping("/responses")  // /responses 경로로 수정
     public ResponseEntity<Object> saveAnswer(@RequestBody Answer answer) {
