@@ -1,7 +1,7 @@
 package com.example.web;
 
-import com.example.web.progress.dto.ParticipantCountDTO;
-import com.example.web.progress.usecase.TestProgressService;
+import com.example.domain.progress.dto.ParticipantCountDTO;
+import com.example.domain.progress.usecase.TestProgressService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;

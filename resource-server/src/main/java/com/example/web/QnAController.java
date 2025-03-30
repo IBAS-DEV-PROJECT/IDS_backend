@@ -1,10 +1,10 @@
 package com.example.web;
 
-import com.example.web.qna.domain.Question;
-import com.example.web.qna.domain.Answer;
-import com.example.web.qna.dto.AnswerDTO;
-import com.example.web.qna.dto.QuestionDTO;
-import com.example.web.qna.usecase.QnAService;
+import com.example.domain.qna.domain.Question;
+import com.example.domain.qna.domain.Answer;
+import com.example.domain.qna.dto.AnswerDTO;
+import com.example.domain.qna.dto.QuestionDTO;
+import com.example.domain.qna.usecase.QnAService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
